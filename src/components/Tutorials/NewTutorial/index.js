@@ -175,8 +175,8 @@ const NewTutorial = ({ viewModal, onSidebarClick, viewCallback, active }) => {
         <br/>
         
           <div className={classes.root}>
-            <Avatar className={classes.purple}>{sampleName[0]}</Avatar>
-            <Typography className={classes.item}>{sampleName}</Typography>
+            <Avatar className={classes.purple}>{displayName[0]}</Avatar>
+            <Typography className={classes.item}>{displayName}</Typography>
           </div>
             
           <form id="tutorialNewForm">
