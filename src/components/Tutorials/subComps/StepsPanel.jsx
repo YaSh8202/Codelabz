@@ -35,7 +35,7 @@ const StepsPanel = ({
         {stepsData &&
           stepsData.map((step, index) => {
             return (
-              <Step key={"step" + step.id}>
+              <Step data-testid={"step" + index} key={"step" + step.id}>
                 <StepLabel
                   sx={theme => ({
                     p: 2,

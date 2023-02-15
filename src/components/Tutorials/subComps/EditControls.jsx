@@ -109,6 +109,7 @@ const EditControls = ({
       >
         <Button
           color="info"
+          data-testid="addNewStep"
           variant="contained"
           sx={{
             boxShadow: "none",
@@ -215,7 +216,7 @@ const EditControls = ({
                   <FileCopyIcon /> Preview mode
                 </Button>
               )}
-              <Button type="dashed">
+              <Button data-testid={"publishTutorial"} type="dashed">
                 <FileCopyIcon /> Publish
               </Button>
               <DropdownMenu key="more" />

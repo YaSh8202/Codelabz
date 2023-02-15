@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("Editor Test | CodeLabz", () => {
+context("Editor Test | CodeLabz", () => {
   beforeEach(function () {
     cy.fixture("login").then(function (credentials) {
       this.credentials = credentials;
@@ -19,28 +19,53 @@ describe("Editor Test | CodeLabz", () => {
     cy.wait(5000);
   });
 
-  it("create new tutorial", function () {
+  it("Should create new tutorial", function () {
     cy.visit(`${this.base_url}tutorials`);
-    cy.get("[data-testId=addNewTutorial]").click()
+    cy.get("[data-testId=NewTutorialBtn]").click();
+    cy.get("[data-testId=tutorialNewModal]").should("exist");
+    cy.get("#orgSelect").should("exist").click();
+    cy.get("#react-select-3-listbox").eq(0).click();
+    cy.get("[data-testId=newTutorial_title]").should("exist").type("test tutorial");
+    cy.get("[data-testId=newTutorial_summary]").should("exist").type("test tutorial summary");
+    cy.get("[data-testId=newTutorialSubmit]").should("exist").click();
+    cy.wait(2000);
+    cy.get("[data-testId=tutorialNewModal]").should("not.exist");
   })
 
-  it("check editor view exist", function () {
-    cy.visit(`${this.base_url}tutorials/codelabzorg/OKfLHvn0F8OklPTHFnS0`)
-    cy.get('[data-testId=tutorial-content').should("exist")
-  })
-
-  it("check firepad exist", function () {
-    cy.visit(`${this.base_url}tutorials/codelabzorg/OKfLHvn0F8OklPTHFnS0`);
-    cy.wait(6000);
+  it("Should publish tutorial successfully", function () {
+    cy.get('[data-testId=tutorial-content').should("exist");
+    cy.get('[data-testid=tutorialTitle]').contains("test tutorial");
     cy.get("[data-testId=editorMode]").click();
     cy.wait(2000);
+    cy.get('.CodeMirror-code').type("{selectall}{backspace}");
+    cy.get('.CodeMirror-code').type("test{enter}line2")
+    cy.get('[data-testId=stepTitleInput]').type("{selectall}{backspace}Test step1");
+    cy.get('[data-testId=stepTimeInput]').type('{uparrow}{uparrow}');
+    cy.get('[data-testId=publishTutorial]').click();
+    cy.wait(2000);
+    cy.get('[data-testId=step0').contains("Test step1");
+  });
+
+  it("Should add new step", function () {
+
+    cy.get('[data-testId=addNewStep]').click();
+    cy.get('[data-testId=newStepModal]').should("exist");
+
+    cy.get('[data-testId=newStepTitleInput]').type("Test step2");
+    cy.get('[data-testId=newStepTimeInput]').type("10");
+    cy.get('[data-testId=newStepSubmitButton]').click();
+
+
+
+
+
 
     // cy.get("[data-testId=editorFirepad]").should("exist");
   });
 
   it("add image input", function () {
-    cy.visit(`${this.base_url}tutorials/codelabzorg/OKfLHvn0F8OklPTHFnS0`);
-    cy.wait(2000);
+    // cy.visit(`${this.base_url}tutorials/codelabzorg/OKfLHvn0F8OklPTHFnS0`);
+    // cy.wait(2000);
     cy.get("[data-testId=tutorialImgUpload]").should("not.exist");
     cy.get("#tutorialAddImg").click();
     cy.get("[data-testId=tutorialImgUpload]").should("exist");
