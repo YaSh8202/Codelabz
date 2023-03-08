@@ -242,6 +242,7 @@ export const uploadOrgProfileImage =
 
       dispatch({ type: actions.EDIT_ORG_GENERAL_SUCCESS });
     } catch (e) {
+      console.log("error", e);
       dispatch({ type: actions.EDIT_ORG_GENERAL_FAIL, payload: e.message });
     }
   };
