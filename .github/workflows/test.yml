@@ -57,4 +57,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: cypress-videos
-          path: Codelabz/cypress/videos/
+          path: cypress/videos/
